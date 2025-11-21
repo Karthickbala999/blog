@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up · My Blog{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 40px auto;">
+    <h2>Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div style="color: #ef4444; margin-bottom: 12px;">
+                Please correct the errors below.
+            </div>
+        {% endif %}
+        <div class="form-row">
+            <label for="{{ form.username.id_for_label }}">Username</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div style="color: #ef4444; font-size: 0.9em; margin-top: 4px;">
+                    {{ form.username.errors }}
+                </div>
+            {% endif %}
+            {% if form.username.help_text %}
+                <div style="color: var(--muted); font-size: 0.85em; margin-top: 4px;">
+                    {{ form.username.help_text }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-row">
+            <label for="{{ form.password1.id_for_label }}">Password</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                <div style="color: #ef4444; font-size: 0.9em; margin-top: 4px;">
+                    {{ form.password1.errors }}
+                </div>
+            {% endif %}
+            {% if form.password1.help_text %}
+                <div style="color: var(--muted); font-size: 0.85em; margin-top: 4px;">
+                    {{ form.password1.help_text }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-row">
+            <label for="{{ form.password2.id_for_label }}">Password Confirmation</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <div style="color: #ef4444; font-size: 0.9em; margin-top: 4px;">
+                    {{ form.password2.errors }}
+                </div>
+            {% endif %}
+            {% if form.password2.help_text %}
+                <div style="color: var(--muted); font-size: 0.85em; margin-top: 4px;">
+                    {{ form.password2.help_text }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-row">
+            <button type="submit">Sign Up</button>
+        </div>
+       
+        <div style="margin-top: 16px; text-align: center;">
+            <a href="{% url 'login' %}" style="color: var(--accent);">Already have an account? Login</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

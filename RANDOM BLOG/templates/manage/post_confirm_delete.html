@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Post · Manage{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h2>Delete Post</h2>
+  <p>Are you sure you want to delete: <strong>{{ post.title }}</strong>?</p>
+  {% if post.image %}
+    <div class="image-preview">
+      <img src="{{ post.image.url }}" alt="{{ post.title }}">
+    </div>
+  {% endif %}
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" style="background:#ef4444">Yes, delete</button>
+    <a href="{% url 'manage_dashboard' %}" style="margin-left:8px">Cancel</a>
+  </form>
+</div>
+{% endblock %}
+

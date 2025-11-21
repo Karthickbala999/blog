@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Login · My Blog{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 40px auto;">
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div style="color: #ef4444; margin-bottom: 12px;">
+                Please correct the errors below.
+            </div>
+        {% endif %}
+        <div class="form-row">
+            <label for="{{ form.username.id_for_label }}">Username</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div style="color: #ef4444; font-size: 0.9em; margin-top: 4px;">
+                    {{ form.username.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-row">
+            <label for="{{ form.password.id_for_label }}">Password</label>
+            {{ form.password }}
+            {% if form.password.errors %}
+                <div style="color: #ef4444; font-size: 0.9em; margin-top: 4px;">
+                    {{ form.password.errors }}
+                </div>
+            {% endif %}
+        </div>
+        {% if form.non_field_errors %}
+            <div style="color: #ef4444; margin-bottom: 12px;">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        <div class="form-row">
+            <button type="submit">Login</button>
+        </div>
+        
+       
+        </div>
+        <div style="margin-top: 16px; text-align: center;">
+            <a href="{% url 'signup' %}" style="color: var(--accent);">Don't have an account? Sign up</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

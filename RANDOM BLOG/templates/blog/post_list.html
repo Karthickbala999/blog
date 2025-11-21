@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Posts · My Blog{% endblock %}
+
+{% block content %}
+<h2>Latest Posts</h2>
+<ul class="post-list">
+  {% for post in posts %}
+    <li class="post-item">
+      {% if post.image %}
+        <a href="{{ post.get_absolute_url }}" class="post-thumb">
+          <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        </a>
+      {% endif %}
+      <div class="post-content">
+        <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+        <small>Published {{ post.created_at|date:"M d, Y" }}</small>
+        <p>{{ post.body|truncatewords:30 }}</p>
+      </div>
+    </li>
+  {% empty %}
+    <li>No posts yet.</li>
+  {% endfor %}
+  </ul>
+{% endblock %}
+

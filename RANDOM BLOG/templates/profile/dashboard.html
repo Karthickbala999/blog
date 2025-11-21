@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Dashboard · My Blog{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h2 style="margin-top:0;">Welcome, {{ request.user.username }}</h2>
+  <p class="muted">You have read {{ total_posts }} unique posts.</p>
+  {% if visits %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Post</th>
+          <th>Visited</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for visit in visits %}
+          <tr>
+            <td><a href="{{ visit.post.get_absolute_url }}">{{ visit.post.title }}</a></td>
+            <td>{{ visit.visited_at|date:"M d, Y H:i" }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>You haven’t viewed any posts yet. Start exploring from the <a href="{% url 'post_list' %}">blog home</a>.</p>
+  {% endif %}
+</div>
+{% endblock %}
+
